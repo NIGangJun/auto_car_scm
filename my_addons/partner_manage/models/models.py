@@ -24,15 +24,25 @@ class MaintainOrder(models.Model):
 
     # 表单主要信息
     name = fields.Char(string='账单号')
+
+    def _compute_bill_count(self):
+        """
+        计算订单下账单生成的数量
+        :return:
+        """
+        for line in self:
+            line.bill_count = '1/1'
+
+    bill_count = fields.Char(string='账单数量', compute='_compute_bill_count')
     license_plate = fields.Char(string='车牌号')
     order_no = fields.Char(string='订单号')
     print_date = fields.Datetime(string='打印日期')
     repair_date = fields.Datetime(string='修理日期')
-    identifier_fin = fields.Char(string='车辆识别号', help='FIN')
+    identifier_fin = fields.Char(string='车辆识别号(FIN)')
     fir_reg_time = fields.Datetime(string='首次登记日期')
     notice_time = fields.Datetime(string='通知日期')
-    repair_adviser = fields.Char(string='维修顾问')
-    identifier_vin = fields.Char(string='车辆识别号', help='VIN')
+    repair_adviser = fields.Many2one(comodel_name='res.users', string='维修顾问')
+    identifier_vin = fields.Char(string='车辆识别号(VIN)')
     next_maintain_date = fields.Datetime(string='下次建议保养日期')
     old_recover = fields.Char(string='旧件回收')
     engine_num = fields.Char(string='发动机号')
@@ -40,6 +50,7 @@ class MaintainOrder(models.Model):
     enter_time = fields.Datetime(string='进厂时间')
 
     # 表单次要信息
+    # todo 这下面的字段下次需要修改为只读，否则页面看起来会很奇怪
     subtotal_price = fields.Float(string='小计')
     work_hour = fields.Float(string='工时')
     car_parts = fields.Float(string='零件')

@@ -1,27 +1,123 @@
 <odoo>
     <data>
         <!-- explicit list view definition -->
-        <record model="ir.ui.view" id="partner_manage.list">
-            <field name="name">partner_manage list</field>
-            <field name="model">partner_manage.partner_manage</field>
+        <record model="ir.ui.view" id="maintain_order_tree_view">
+            <field name="name">maintain.order.tree.view</field>
+            <field name="model">maintain.order</field>
             <field name="arch" type="xml">
                 <tree>
                     <field name="name"/>
-                    <field name="value"/>
-                    <field name="value2"/>
+                    <field name="license_plate"/>
+                    <field name="order_no"/>
+                    <field name="fir_reg_time"/>
+                    <field name="repair_date"/>
+                    <field name="repair_adviser"/>
+                    <field name="notice_time"/>
+                    <field name="car_mode"/>
+                    <field name="next_maintain_date"/>
                 </tree>
             </field>
         </record>
 
+        <record model="ir.ui.view" id="maintain_order_form_view">
+            <field name="name">maintain.order.form.view</field>
+            <field name="model">maintain.order</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <header>
+
+                        </header>
+                        <div>
+                            <div class="oe_title">
+                                <h1>
+                                    新建
+                                </h1>
+                            </div>
+                            <h1 style="font-size: 1.9rem;">
+                                <div class="row">
+                                    <div class="col col-md-auto">
+                                        <label for="bill_count" string="账单"/>
+                                        <div>
+                                            <field name="bill_count" placeholder="e.g. 101000" class="oe_inline"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </h1>
+                        </div>
+                        <group col="4">
+                            <group>
+                                <field name="license_plate"/>
+                                <field name="identifier_fin"/>
+                                <field name="identifier_vin"/>
+                            </group>
+                            <group>
+                                <field name="order_no"/>
+                                <field name="fir_reg_time"/>
+                                <field name="next_maintain_date"/>
+                            </group>
+                            <group>
+                                <field name="print_date"/>
+                                <field name="repair_date"/>
+                                <field name="old_recover"/>
+                            </group>
+                            <group>
+                                <field name="repair_date"/>
+                                <field name="repair_adviser"/>
+                                <field name="engine_num"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="car_mode"/>
+                            </group>
+                            <group>
+                                <field name="enter_time"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="明细" name="order_line">
+                                <field name="maintain_order_line" mode="tree">
+                                    <tree>
+                                        <field name="seq"/>
+                                        <field name="code"/>
+                                        <field name="line_type"/>
+                                        <field name="description"/>
+                                        <field name="line_flag"/>
+                                        <field name="partner_type_no"/>
+                                        <field name="price"/>
+                                        <field name="unit"/>
+                                        <field name="discount_percent"/>
+                                        <field name="total_price"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                        <group class="oe_subtotal_footer oe_right">
+                            <field name="subtotal_price" nolabel="1" class="oe_subtotal_footer_separator"/>
+                            <field name="work_hour" nolabel="1" class="oe_subtotal_footer_separator"/>
+                            <field name="car_parts" nolabel="1" class="oe_subtotal_footer_separator"/>
+                            <field name="order_other" nolabel="1" class="oe_subtotal_footer_separator"/>
+                            <field name="service_set" nolabel="1" class="oe_subtotal_footer_separator"/>
+                            <field name="total_price" nolabel="1" class="oe_subtotal_footer_separator"/>
+                            <field name="service_note" nolabel="1" class="oe_subtotal_footer_separator"/>
+                        </group>
+                        <div class="oe_clear"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
         <!-- actions opening views on models -->
-        <record model="ir.actions.act_window" id="partner_manage.action_window">
-            <field name="name">partner_manage window</field>
-            <field name="res_model">partner_manage.partner_manage</field>
+        <record model="ir.actions.act_window" id="maintain_order_window">
+            <field name="name">服务记录</field>
+            <field name="res_model">maintain.order</field>
             <field name="view_mode">tree,form</field>
         </record>
 
         <!-- server action to the one above -->
-        <record model="ir.actions.server" id="partner_manage.action_server">
+        <!-- odoo 默认创建的页面视图，暂时不知道有什么用，先保留
+        <record model="ir.actions.server" id="action_server">
             <field name="name">partner_manage server</field>
             <field name="model_id" ref="model_partner_manage_partner_manage"/>
             <field name="state">code</field>
@@ -33,5 +129,6 @@
                 }
             </field>
         </record>
+        -->
     </data>
 </odoo>

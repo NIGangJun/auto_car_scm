@@ -6,7 +6,7 @@
         <menuitem name="订单管理" id="order_manage" parent="maintain_root"
                   sequence="1"/>
         <!-- actions -->
-        <menuitem name="服务订单" id="service_order" parent="order_manage" action="partner_manage.action_window"
+        <menuitem name="服务订单" id="service_order" parent="order_manage" action="maintain_order_window"
                   sequence="1"/>
     </data>
 </odoo>
