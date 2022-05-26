@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 
 
 class ResPartner(models.Model):
@@ -21,6 +21,18 @@ class MaintainOrder(models.Model):
     _name = 'maintain.order'
     _description = 'maintain order'
     _rec_name = 'name'
+
+    @api.model
+    def create(self, vals):
+        """
+        继承创建方法
+        :param vals:
+        :return:
+        """
+        if vals.get('name', _('New')) == _('New'):
+            vals['name'] = self.env['ir.sequence'].next_by_code('maintain.order') or _('New')
+        res = super(MaintainOrder, self).create(vals)
+        return res
 
     # 表单主要信息
     name = fields.Char(string='账单号')
@@ -51,13 +63,13 @@ class MaintainOrder(models.Model):
 
     # 表单次要信息
     # todo 这下面的字段下次需要修改为只读，否则页面看起来会很奇怪
-    subtotal_price = fields.Float(string='小计')
-    work_hour = fields.Float(string='工时')
-    car_parts = fields.Float(string='零件')
-    order_other = fields.Float(string='其他')
-    service_set = fields.Float(string='套餐')
-    total_price = fields.Float(string='总计')
-    service_note = fields.Text(string='服务备注')
+    subtotal_price = fields.Float(string='小计', readonly=True)
+    work_hour = fields.Float(string='工时', readonly=True)
+    car_parts = fields.Float(string='零件', readonly=True)
+    order_other = fields.Float(string='其他', readonly=True)
+    service_set = fields.Float(string='套餐', readonly=True)
+    total_price = fields.Float(string='总计', readonly=True)
+    service_note = fields.Text(string='服务备注', readonly=True)
 
     maintain_order_line = fields.One2many(comodel_name='maintain.order_line', inverse_name='maintain_order_id')
 

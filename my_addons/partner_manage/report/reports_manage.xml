@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="report_maintain_order_manage" model="ir.actions.report">
+            <field name="name">账单打印</field>
+            <field name="model">maintain.order</field>
+            <field name="report_type">qweb-html</field>
+            <field name="report_name">partner_manage.report_maintain_order</field>
+            <field name="report_file">partner_manage.report_maintain_order</field>
+            <field name="print_report_name">'账单 - %s' % (object.name)</field>
+            <field name="binding_model_id" ref="model_maintain_order"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

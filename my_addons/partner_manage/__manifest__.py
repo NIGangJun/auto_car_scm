@@ -26,9 +26,12 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'data/ir_sequence.xml',
         'views/templates.xml',
         'views/views.xml',
         'views/menu.xml',
+        'report/car_service.xml',
+        'report/reports_manage.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
