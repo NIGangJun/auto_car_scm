@@ -54,6 +54,9 @@ class MaintainOrder(models.Model):
         :return:
         """
 
+    company_id = fields.Many2one(comodel_name="res.company", string='公司', default=lambda self: self.env.company)
+    partner_id = fields.Many2one(comodel_name="res.partner", string='客户', domain=[('customer', '=', True)])
+
     license_plate = fields.Char(string='车牌号')
     order_no = fields.Char(string='订单号')
     print_date = fields.Datetime(string='打印日期')
@@ -68,16 +71,24 @@ class MaintainOrder(models.Model):
     engine_num = fields.Char(string='发动机号')
     car_mode = fields.Char(string='车款')
     enter_time = fields.Datetime(string='进厂时间', default=fields.Datetime.now)
+    mileage = fields.Char(string='里程数')
 
     # 表单次要信息
     # todo 这下面的字段下次需要修改为只读，否则页面看起来会很奇怪
-    subtotal_price = fields.Float(string='小计', readonly=True)
+    @api.depends('maintain_order_line')
+    def _compute_subtotal_price(self):
+        total = 0.0
+        for line in self.maintain_order_line:
+            total += line.total_price
+        self.subtotal_price = total
+
+    subtotal_price = fields.Float(string='小计', compute="_compute_subtotal_price")
     work_hour = fields.Float(string='工时', readonly=True)
     car_parts = fields.Float(string='零件', readonly=True)
     order_other = fields.Float(string='其他', readonly=True)
     service_set = fields.Float(string='套餐', readonly=True)
     total_price = fields.Float(string='总计', readonly=True)
-    service_note = fields.Text(string='服务备注', readonly=True)
+    service_note = fields.Text(string='服务备注')
 
     maintain_order_line = fields.One2many(comodel_name='maintain.order_line', inverse_name='maintain_order_id')
 
@@ -102,3 +113,11 @@ class MaintainOrderLine(models.Model):
     unit = fields.Float(string='数量')
     discount_percent = fields.Float(string='折扣率')
     total_price = fields.Float(string='金额', help='单位(元)')
+
+    @api.onchange('price', 'unit')
+    def _onchange_total_price(self):
+        """
+        根据单价、数量和折扣率自动计算金额
+        :return:
+        """
+        self.total_price = self.price * self.unit * self.discount_percent

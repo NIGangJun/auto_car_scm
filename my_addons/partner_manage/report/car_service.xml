@@ -11,19 +11,169 @@
                                     <table cellpadding="0" cellspacing="0" class="T">
                                         <tbody>
                                             <tr>
-                                                <td style="width:25%">
+                                                <th style="width:50%">
+                                                    <h3 t-field="order.license_plate"/>
+                                                    <h3 t-field="order.car_mode"/>
+                                                </th>
+                                                <th style="width:50%">
+                                                    <div>
+                                                        <img t-att-src="image_data_uri(order.company_id.logo)"
+                                                             style="max-height: 4cm; max-width: 8cm;"/>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <th style="width:50%;font-size:16px">
                                                     <span>
-                                                        <span class="font-size">账单流水号：
-                                                        </span>
+                                                        <span class="font-size">账单：</span>
+                                                        <span class="font-size" t-field="order.bill_count"/>
+                                                    </span>
+                                                    <span style="padding-left: 40px">
+                                                        <span class="font-size">账单流水号：</span>
                                                         <span class="font-size" t-field="order.name"/>
                                                     </span>
-                                                </td>
-                                                <!--  todo 修正标题:增加字段,区别报表标题  -->
-                                                <td style="width: 50%; text-align: center;">
-                                                    <h2>奔驰</h2>
-
-                                                </td>
-                                                <td style="width:25%">
+                                                    <br/>
+                                                    <span>
+                                                        <span class="font-size">客户：</span>
+                                                        <span class="font-size" t-field="order.partner_id"/>
+                                                        <span class="font-size">先生</span>
+                                                    </span>
+                                                </th>
+                                                <th style="width: 50%;text-align:right;font-weight:normal;padding-right:20px">
+                                                    <span style="font-size: 16px">
+                                                        <span t-field="order.company_id.name"/>
+                                                        <br/>
+                                                        <span t-field="order.company_id.en_name"/>
+                                                        <br/>
+                                                        <span t-field="order.company_id.explain"/>
+                                                    </span>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">
+                                                    <table class="T1" cellpadding="0" cellspacing="0">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="width: 10%;">
+                                                                    <table class="TLeft" cellpadding="0"
+                                                                           cellspacing="0">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="T-label"
+                                                                                    style="height:40px;">
+                                                                                    <span>
+                                                                                        车牌号码
+                                                                                    </span>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                                <td style="width: 15%;">
+                                                                    <table class="TCenter" cellpadding="0"
+                                                                           cellspacing="0">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="T-field"
+                                                                                    style="height:40px;">
+                                                                                    <span class="font-size"
+                                                                                          t-field="order.license_plate"/>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                                <td style="width: 10%;">
+                                                                    <table class="TCenter" cellpadding="0"
+                                                                           cellspacing="0">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="T-label"
+                                                                                    style="height:40px;">
+                                                                                    <span>
+                                                                                        订单号
+                                                                                    </span>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                                <td style="width: 15%;">
+                                                                    <table class="TCenter" cellpadding="0"
+                                                                           cellspacing="0">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="T-field"
+                                                                                    style="height:40px;">
+                                                                                    <span class="font-size"
+                                                                                          t-field="order.order_no"/>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                                <td style="width: 10%;">
+                                                                    <table class="TCenter" cellpadding="0"
+                                                                           cellspacing="0">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="T-label"
+                                                                                    style="height:40px;">
+                                                                                    <span>
+                                                                                        打印日期
+                                                                                    </span>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                                <td style="width: 15%;">
+                                                                    <table class="TCenter" cellpadding="0"
+                                                                           cellspacing="0">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="T-field"
+                                                                                    style="height:40px;">
+                                                                                    <span class="font-size"
+                                                                                          t-field="order.print_date"
+                                                                                          t-options='{"format": "yyyy-MM-d hh:mm"}'/>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                                <td style="width: 10%;">
+                                                                    <table class="TCenter" cellpadding="0"
+                                                                           cellspacing="0">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="T-label"
+                                                                                    style="height:40px;">
+                                                                                    <span>
+                                                                                        修理日期
+                                                                                    </span>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                                <td style="width: 15%;">
+                                                                    <table class="TRight" cellpadding="0"
+                                                                           cellspacing="0">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="T-field"
+                                                                                    style="height:40px;">
+                                                                                    <span class="font-size"
+                                                                                          t-field="order.repair_date"/>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -341,6 +491,9 @@
                                                                                     <span class="font-size"
                                                                                           t-field="order.enter_time"
                                                                                           t-options='{"format": "yyyy-MM-d hh:mm"}'/>
+                                                                                    <span class="font-size"
+                                                                                          style="padding-left:10px"
+                                                                                          t-field="order.mileage"/>
                                                                                 </td>
                                                                             </tr>
                                                                         </tbody>
@@ -460,6 +613,29 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                <div>
+                                    <table class="T1" cellpadding="0" cellspacing="0" style="margin-top:55px">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width: 100%;height:70px">
+                                                    <table class="Tall" cellpadding="0"
+                                                           cellspacing="0" style="width:1250px">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="TD"
+                                                                    style="text-align: left;padding-left: 2%;vertical-align: top;padding-top: 10px;">
+                                                                    服务备注：
+                                                                    <br/>
+                                                                    <span t-field="order.service_note"/>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -511,6 +687,16 @@
                         border-left-style: solid;
                         height: 100%;
                         }
+                        .Tall{
+                        width: 100%;
+                        border-width: 1px;
+                        border-color: Black;
+                        border-top-style: solid;
+                        border-right-style: solid;
+                        border-bottom-style: inherit;
+                        border-left-style: solid;
+                        height: 100%;
+                        }
 
                         /*第三层中间table*/
                         .TCenter {
@@ -543,7 +729,7 @@
                         border-color: Black;
                         border-top-style: solid;
                         border-right-style: solid;
-                        border-bottom-style: solid;
+                        border-bottom-style: inherit;
                         border-left-style: solid;
                         }
 
@@ -553,7 +739,7 @@
                         border-color: Black;
                         border-top-style: solid;
                         border-right-style: solid;
-                        border-bottom-style: solid;
+                        border-bottom-style: inherit;
                         border-left-style: inherit;
                         }
 
@@ -563,7 +749,7 @@
                         border-color: Black;
                         border-top-style: solid;
                         border-right-style: solid;
-                        border-bottom-style: solid;
+                        border-bottom-style: inherit;
                         border-left-style: inherit;
                         }
 
