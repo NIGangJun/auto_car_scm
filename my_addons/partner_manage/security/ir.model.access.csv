@@ -1,3 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_maintain_order,access_maintain_order,partner_manage.model_maintain_order,base.group_user,1,1,1,1
 access_maintain_order_line,access_maintain_order_line,partner_manage.model_maintain_order_line,base.group_user,1,1,1,1
+partner_manage.access_vehicle_info,access_vehicle_info,partner_manage.model_vehicle_info,base.group_user,1,1,1,1

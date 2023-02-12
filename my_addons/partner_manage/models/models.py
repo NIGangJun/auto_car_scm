@@ -17,6 +17,18 @@ class ResCompany(models.Model):
     explain = fields.Char(string='授权说明')
 
 
+class VehicleInfo(models.Model):
+    _name = 'vehicle.info'
+    _description = 'vehicle info'
+    _rec_name = 'vehicle_no'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
+
+    vehicle_no = fields.Char('车牌号')
+    owner_id = fields.Many2one(comodel_name='res.partner', string='车主')
+    owner_phone = fields.Char('车主电话')
+    insure_datetime = fields.Datetime('投保时间')
+
+
 class MaintainOrder(models.Model):
     _name = 'maintain.order'
     _description = 'maintain order'
@@ -47,7 +59,7 @@ class MaintainOrder(models.Model):
 
     bill_count = fields.Char(string='账单数量', compute='_compute_bill_count')
 
-    @api.onchange('license_plate')
+    @api.onchange('vehicle_id')
     def _onchange_license_plate(self):
         """
         改变车牌号，默认将小写转换为大写
@@ -55,9 +67,9 @@ class MaintainOrder(models.Model):
         """
 
     company_id = fields.Many2one(comodel_name="res.company", string='公司', default=lambda self: self.env.company)
-    partner_id = fields.Many2one(comodel_name="res.partner", string='客户', domain=[('customer', '=', True)])
+    partner_id = fields.Many2one(comodel_name="res.partner", string='客户')
 
-    license_plate = fields.Char(string='车牌号')
+    vehicle_id = fields.Many2one(comodel_name="vehicle.info", string='车牌号')
     order_no = fields.Char(string='订单号')
     print_date = fields.Datetime(string='打印日期')
     repair_date = fields.Datetime(string='修理日期')
@@ -106,6 +118,7 @@ class MaintainOrderLine(models.Model):
     seq = fields.Integer(string='序号')
     code = fields.Char(string='代码')
     line_type = fields.Selection(string='类型', selection=LINE_TYPE)
+    material_details = fields.Char(string='材料明细')
     description = fields.Char(string='说明')
     line_flag = fields.Char(string='标识')
     partner_type_no = fields.Char(string='客户类型编号')

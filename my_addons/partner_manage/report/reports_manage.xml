@@ -29,7 +29,6 @@
             <field name="print_report_name">'账单 - %s' % (object.name)</field>
             <field name="binding_model_id" ref="model_maintain_order"/>
             <field name="binding_type">report</field>
-            <field name="paperformat_id" ref="a4_landscape_for_car_service"/>
         </record>
     </data>
 </odoo>

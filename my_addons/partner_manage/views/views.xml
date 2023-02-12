@@ -7,7 +7,7 @@
             <field name="arch" type="xml">
                 <tree>
                     <field name="name"/>
-                    <field name="license_plate"/>
+                    <field name="vehicle_id"/>
                     <field name="order_no"/>
                     <field name="fir_reg_time" widget="date"/>
                     <field name="repair_date"/>
@@ -55,7 +55,7 @@
                         </div>
                         <group col="4">
                             <group>
-                                <field name="license_plate"/>
+                                <field name="vehicle_id"/>
                                 <field name="identifier_fin"/>
                                 <field name="identifier_vin"/>
                             </group>
@@ -93,6 +93,7 @@
                                         <field name="seq"/>
                                         <field name="code"/>
                                         <field name="line_type"/>
+                                        <field name="material_details"/>
                                         <field name="description"/>
                                         <field name="line_flag"/>
                                         <field name="partner_type_no"/>
